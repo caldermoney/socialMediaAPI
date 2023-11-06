@@ -20,7 +20,6 @@ const reactionSchema = new Schema({
     type: Date,
     default: Date.now,
     get: (timestamp) => {
-      // Format the timestamp here
       return timestamp;
     },
   },
@@ -42,7 +41,6 @@ const thoughtSchema = new Schema({
     type: Date,
     default: Date.now,
     get: (timestamp) => {
-      // Format the timestamp here
       return timestamp;
     },
   },

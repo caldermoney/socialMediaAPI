@@ -1,5 +1,5 @@
 const express = require('express');
-const { User } = require('../models/user'); // Make sure this path matches the location of your User model file
+const User = require('../models/user');
 const router = express.Router();
 
 // GET all users

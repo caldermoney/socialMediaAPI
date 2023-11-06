@@ -19,7 +19,7 @@ app.use('/routes/users', userRoutes);
 app.use('/routes/thoughts', thoughtRoutes);
 
 // Define the port
-const port = process.env.PORT || 27017;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server running on port ${port}...`);
 });

@@ -1,116 +1,65 @@
-# socialMediaAPI
 
-NoSQL Challenge: Social Network API
-MongoDB is a popular choice for many social networks due to its speed with large amounts of data and flexibility with unstructured data. Over the last part of this course, you’ll use several of the technologies that social networking platforms use in their full-stack applications. Because the foundation of these applications is data, it’s important that you understand how to build and structure the API first.
+# Social Media API
 
-Your challenge is to build an API for a social network web application where users can share their thoughts, react to friends’ thoughts, and create a friend list. You’ll use Express.js for routing, a MongoDB database, and the Mongoose ODM. In addition to using the Express.jsLinks to an external site. and MongooseLinks to an external site. packages, you may also optionally use a JavaScript date library of your choice or the native JavaScript Date object to format timestamps.
+This project is a backend implementation for a social media application using Node.js, Express.js, and MongoDB. The API allows users to post thoughts, react to thoughts, and add friends.
 
-Because this application won’t be deployed, you’ll also need to create a walkthrough video that demonstrates its functionality and all of the following acceptance criteria being met. You’ll need to submit a link to the video and add it to the README of your project.
+Video link to Insomnia API demo. - https://drive.google.com/file/d/16kvyHL0w5e_VmB3UZ72fEX_ww8gBuci7/view
 
-User Story
-AS A social media startup
-I WANT an API for my social network that uses a NoSQL database
-SO THAT my website can handle large amounts of unstructured data
-Acceptance Criteria
-GIVEN a social network API
-WHEN I enter the command to invoke the application
-THEN my server is started and the Mongoose models are synced to the MongoDB database
-WHEN I open API GET routes in Insomnia for users and thoughts
-THEN the data for each of these routes is displayed in a formatted JSON
-WHEN I test API POST, PUT, and DELETE routes in Insomnia
-THEN I am able to successfully create, update, and delete users and thoughts in my database
-WHEN I test API POST and DELETE routes in Insomnia
-THEN I am able to successfully create and delete reactions to thoughts and add and remove friends to a user’s friend list
+## Table of Contents
 
-Getting Started
-Use the following guidelines to set up your models and API routes:
+- [Installation](#installation)
+- [Usage](#usage)
+- [Routes](#routes)
+- [Models](#models)
+- [Contributing](#contributing)
+- [License](#license)
 
-Models
-User
+## Installation
 
-username
+To install this project, clone the repo and install the required npm packages:
 
-String
-Unique
-Required
-Trimmed
-email
+\```bash
+git clone https://github.com/your-username/socialMediaAPI.git
+cd socialMediaAPI
+npm install
+\```
 
-String
-Required
-Unique
-Must match a valid email address (look into Mongoose's matching validation)
-thoughts
+## Usage
 
-Array of _id values referencing the Thought model
-friends
+To start the server, run the following command:
 
-Array of _id values referencing the User model (self-reference)
-Schema Settings
+\```bash
+npm start
+\```
 
-Create a virtual called friendCount that retrieves the length of the user's friends array field on query.
+For development, you can use:
 
-Thought
+\```bash
+npm run dev
+\```
 
-thoughtText
+This will start the server with nodemon, which will watch for any file changes and restart the server automatically.
 
-String
-Required
-Must be between 1 and 280 characters
-createdAt
+## Routes
 
-Date
-Set default value to the current timestamp
-Use a getter method to format the timestamp on query
-username (The user that created this thought)
+The API includes the following routes:
 
-String
-Required
-reactions (These are like replies)
+- `/api/users` - for user operations
+- `/api/thoughts` - for thought operations
+- `/api/thoughts/:thoughtId/reactions` - for reaction operations
 
-Array of nested documents created with the reactionSchema
-Schema Settings
+## Models
 
-Create a virtual called reactionCount that retrieves the length of the thought's reactions array field on query.
+The application uses two main models:
 
-Reaction (SCHEMA ONLY)
+- `User` - for managing user information and their relations.
+- `Thought` - for managing thoughts and reactions.
 
-reactionId
+## Contributing
 
-Use Mongoose's ObjectId data type
-Default value is set to a new ObjectId
-reactionBody
+Contributions are welcome! For major changes, please open an issue first to discuss what you would like to change.
 
-String
-Required
-280 character maximum
-username
+## License
 
-String
-Required
-createdAt
+This project is licensed under the ISC License. See the [LICENSE](LICENSE) file for details.
 
-Date
-Set default value to the current timestamp
-Use a getter method to format the timestamp on query
-Schema Settings
-
-This will not be a model, but rather will be used as the reaction field's subdocument schema in the Thought model.
-
-API Routes
-/api/users
-
-GET all users
-
-GET a single user by its _id and populated thought and friend data
-
-POST a new user:
-
-// example data
-{
-  "username": "lernantino",
-  "email": "lernantino@gmail.com"
-}
-PUT to update a user by its _id
-
-DELETE to remove user by its _id
